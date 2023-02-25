@@ -1,0 +1,35 @@
+%!TeX encoding = UTF-8
+%!TeX program = xelatex
+\documentclass{ctexart}
+\usepackage{xcolor}
+\usepackage{listings}
+\begin{document}
+
+\lstset{basicstyle=\ttfamily\small, % 设置字体样式
+    language=C++} % 设置语言
+\lstset{
+    numbers=left, 
+    numberstyle= \tiny, 
+    keywordstyle= \color{ blue!70},
+    backgroundcolor= \color{white}, % 背景颜色
+    frame=shadowbox, % 阴影效果
+    rulesepcolor= \color{ red!20!green!20!blue!20},
+    stringstyle= \color{red!50!green!50!blue!50},
+    escapeinside=``, % 英文分号中可写入中文
+    xleftmargin=2em, aboveskip=1em,
+    framexleftmargin=2em
+}
+\noindent 代码如下： 
+\begin{lstlisting}
+    #include<stdio.h>
+    int main()
+    {
+        printf("`hello,world测试`");//`测试`
+        return 0;
+    }
+\end{lstlisting}
+
+
+\end{document}
+
+

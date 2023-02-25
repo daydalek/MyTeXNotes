@@ -1,0 +1,50 @@
+\documentclass{ctexart}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{amsmath}
+\lstset{basicstyle=\ttfamily\small, % 设置字体样式
+    language=C++} % 设置语言
+\lstset{
+    numbers=left, 
+    numberstyle= \tiny, 
+    keywordstyle= \color{ blue!70},
+    backgroundcolor= \color{white}, % 背景颜色
+    frame=shadowbox, % 阴影效果
+    rulesepcolor= \color{ red!20!green!20!blue!20},
+    stringstyle= \color{red!50!green!50!blue!50},
+    escapeinside=``, % 英文分号中可写入中文
+    xleftmargin=2em, aboveskip=1em,
+    framexleftmargin=2em
+}
+
+\begin{document}
+\title{计算机组成:软硬件接口}
+\author{daydalek}
+\date{\today}
+\maketitle
+\section{概要}
+\subsection{衡量计算机系统的速度}
+如果时间来度量计算机的性能,则完成相同的计算任务,需要时间更少的计算机更快\\
+使用CPU执行时间(CPU execution time) 它只表示CPU上花费的时间\\
+使用系统性能(system performance)来表示空载系统的响应时间\\
+并用属于CPU性能(CPU performance)的术语来表示用户CPU时间\\
+\subsection{相关公式}
+\begin{equation}
+\mbox{程序的CPU执行时间}=\mbox{程序的CPU时钟周期数}\times\mbox{时钟周期时间}
+\end{equation}
+\begin{equation}
+\mbox{程序的CPU执行时间}=\mbox{程序的CPU时钟周期数}/\mbox{时钟频率}
+\end{equation}
+这是因为时钟周期时间和时钟频率是相互倒数的.
+一个程序需要的时钟周期数可写为
+\begin{equation}
+\mbox{程序的CPU时钟周期数}=\mbox{程序的指令数}\times\mbox{每条指令的平均时钟周期数}
+\end{equation}
+术语CPI(Cycles Per Instruction)表示每条指令的平均时钟周期数\\
+于是我们得到以下公式
+\begin{equation}
+\mbox{CPU时间}=\mbox{指令数}\times CPI \times\mbox{时钟周期时间}
+\end{equation}
+\end{document}
+
+
