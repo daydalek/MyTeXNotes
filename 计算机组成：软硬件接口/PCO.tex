@@ -2,8 +2,7 @@
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{amsmath}
-\lstset{basicstyle=\ttfamily\small, % 设置字体样式
-    language=C++} % 设置语言
+\lstset{basicstyle=\ttfamily\small} % 设置字体样式 % 设置语言
 \lstset{
     numbers=left, 
     numberstyle= \tiny, 
@@ -45,6 +44,62 @@
 \begin{equation}
 \mbox{CPU时间}=\mbox{指令数}\times CPI \times\mbox{时钟周期时间}
 \end{equation}
+
+\section{指令}
+\subsection{计算机硬件的操作数}
+MIPS体系架构中的一字为32位(MIPS32)或64位(MIPS64) 此处讨论MIPS32\\
+\subsubsection{存储器操作数}
+由于MIPS只能操作寄存器中的数据，因此需要包含在存储器和寄存器之间传递数据的指令，
+这些指令叫做数据传送指令(Data Transfer Instructions)\\
+为了访问存储器中的每一个字，指令需要给出存储器地址，将数据从
+存储器复制到寄存器的指令叫做取数指令(Load Instructions)，格式是lw+目标寄存器+
+用于寻址的常数和寄存器\\
+一个例子:\\
+\begin{lstlisting}
+    A[12]=h+A[8];
+    -----------------------------------------------
+    lw $t0,32($s3)  # $t0=A[8]
+    add $t0,$t0,$s2 # $t0=h+A[8]
+    sw $t0,48($s3)  # store $t0 in A[12]
+\end{lstlisting}
+\subsubsection{立即数操作数}
+立即数操作数是指令中的常数，它们是在指令中直接给出的，而不是从存储器中读取的\\
+例如要向S3中+4，可以这么写
+\begin{lstlisting}
+    addi $s3,$s3,4
+\end{lstlisting}
+相对从存储器提取常数，使用立即数操作更快\\
+\subsection{计算机中指令的表示}
+以这段代码为例
+\begin{lstlisting}
+    add $t0,$s1,$s2
+\end{lstlisting}
+其十进制表示为
+0 \t 17 \t 18 \t 8 \t 0 \t 32 \\
+以二进制表示是
+000000 \t 01001 \t 01010 \t 00000 \t 01000 \t 100000 \\
+指令的布局叫做指令格式(Instruction Format) 可以看出它是32位长的;
+为了与汇编语言区分，称其为机器语言(Machine Language)，指令序列称为机器码(Machine Code)\\
+\subsubsection{MIPS字段}
+为了简化，把以上字段命名如下\\
+op \t rs \t rt \t rd \t shamt \t funct \\
+其中op是操作码，rs是源1寄存器，rt是源2寄存器，rd是目的寄存器，shamt是移位量，funct是功能码\\
+它们的位数分别是6,5,5,5,5,6\\
+然而，这种安排存在着局限性，它使得寻址范围极为有限。
+例如，取字指令必须指定两个
+寄存器和一个常数 在上述格式中，如果地址使用其中的一个5位字段，那么取字指令的常数
+就被限制在$2^5$(即32)之内.这个常数通常用来从数组或数据结构中选择元素，显然是不够的。
+所以，MIPS还引入另一种指令格式，同样是32位长，但是它的布局是
+op \t rs \t rt \t constant or address \\
+这种格式的指令称为I型指令，它的字段分别是6,5,5,16\\
+注意，此处的rt含义已经发生变化，它不再是源操作数寄存器，而是目的寄存器\\
+举个例子，取字指令的格式是
+\begin{lstlisting}
+    lw $t0,32($s3)
+\end{lstlisting}
+它的机器码是
+100011 \t 10011 \t 01000 \t 0000000000100000 \\
+16位地址或常数码支持更大的基址偏移量，从而支持更大范围的寻址\\
 \end{document}
 
 
