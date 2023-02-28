@@ -1,6 +1,7 @@
 \documentclass{ctexart}
 \usepackage{amsmath}
 \usepackage{xcolor}
+\setlength{\parindent}{0pt}
 \begin{document}
 \title{概率论与数理统计}
 \author{daydalek}
@@ -89,5 +90,39 @@ S中所有样本点的集合称为\textbf{必然事件}\\
     P(A)=\frac{k}{n}=\sum_{j=1}^kP({e_{ij}})
 \end{equation}
 k代表A中所含的基本事件数,而n代表样本空间S中的样本点数.\\
-\
+\subsubsection{超几何分布}
+\begin{equation}
+	P(X=k)=\frac{C_{n_1}^kC_{n_2}^{n-k}}{C_{n_1+n_2}^n}
+\end{equation}
+其中$n_1$代表总体中的第一类个体数,$n_2$代表总体中的第二类个体数,$n$代表抽样个体数.\\
+\subsubsection{几何分布}
+平面中存在区域G包含着部分区域g,现向G中任意投掷\\
+这种被投掷的点落在G的任何一处都是等可能的,且落在g内的概率仅与其面积有关的随机试验称为几何概型.
+\begin{equation}
+	P=\frac{S_g}{S_G}
+\end{equation}
+这种定义可以推广到一维或更高维的空间.\\
+\subsection{条件概率}
+\subsubsection{条件概率的定义}
+设A,B是两个事件,称
+\begin{equation}
+	P(B|A)=\frac{P(A\cap B)}{P(A)}
+\end{equation}
+为事件B在事件A发生的条件下的条件概率.\\
+条件概率符合概率定义的三个条件
+\begin{itemize}
+	\item 非负性
+	\item 规范性
+	\item 可加性
+\end{itemize}
+\subsubsection{乘法定理}
+\begin{equation}
+	P(A\cap B)=P(A)P(B|A)=P(B)P(A|B)(P(A)>0,P(B)>0)
+\end{equation}
+\subsubsection{全概率公式}
+如果$A_1,A_2,\cdots,A_n$是一个样本空间S的一个划分,则有
+\begin{equation}
+	P(B)=\sum_{i=1}^nP(B|A_i)P(A_i)
+\end{equation}
+
 \end{document}

@@ -1,7 +1,11 @@
+\documentclass{ctexart}
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{amsmath}
-\lstset{basicstyle=\ttfamily\small} % 设置字体样式 % 设置语言
+\setlength{\parindent}{0pt}
+\begin{document}
+\lstset{basicstyle=\ttfamily\small, % 设置字体样式
+    language=C++} % 设置语言
 \lstset{
     numbers=left, 
     numberstyle= \tiny, 
@@ -15,7 +19,6 @@
     framexleftmargin=2em
 }
 
-\begin{document}
 \title{计算机组成:软硬件接口}
 \author{daydalek}
 \date{\today}
@@ -28,20 +31,20 @@
 并用属于CPU性能(CPU performance)的术语来表示用户CPU时间\\
 \subsection{相关公式}
 \begin{equation}
-\mbox{程序的CPU执行时间}=\mbox{程序的CPU时钟周期数}\times\mbox{时钟周期时间}
+	\mbox{程序的CPU执行时间}=\mbox{程序的CPU时钟周期数}\times\mbox{时钟周期时间}
 \end{equation}
 \begin{equation}
-\mbox{程序的CPU执行时间}=\mbox{程序的CPU时钟周期数}/\mbox{时钟 频率}
+	\mbox{程序的CPU执行时间}=\mbox{程序的CPU时钟周期数}/\mbox{时钟 频率}
 \end{equation}
 这是因为时钟周期时间和时钟频率是相互倒数的.
 一个程序需要的时钟周期数可写为
 \begin{equation}
-\mbox{程序的CPU时钟周期数}=\mbox{程序的指令数}\times\mbox{每条指令的平均时钟周期数}
+	\mbox{程序的CPU时钟周期数}=\mbox{程序的指令数}\times\mbox{每条指令的平均时钟周期数}
 \end{equation}
 术语CPI(Cycles Per Instruction)表示每条指令的平均时钟周期数\\
 于是我们得到以下公式
 \begin{equation}
-\mbox{CPU时间}=\mbox{指令数}\times CPI \times\mbox{时钟周期时间}
+	\mbox{CPU时间}=\mbox{指令数}\times CPI \times\mbox{时钟周期时间}
 \end{equation}
 
 \section{指令}
@@ -82,12 +85,12 @@ MIPS体系架构中的一字为32位(MIPS32)或64位(MIPS64) 此处讨论MIPS32\
 \subsubsection{MIPS字段}
 op \t rs \t rt \t rd \t shamt \t funct \\
 \begin{itemize}
-    \item op:6位,操作码,用来指定指令的类型
-    \item rs:5位,源寄存器,用来指定第一个操作数
-    \item rt:5位,源寄存器,用来指定第二个操作数
-    \item rd:5位,目的寄存器
-    \item shamt:5位,移位量
-    \item funct:6位,功能码,用来指定指令的具体操作
+	\item op:6位,操作码,用来指定指令的类型
+	\item rs:5位,源寄存器,用来指定第一个操作数
+	\item rt:5位,源寄存器,用来指定第二个操作数
+	\item rd:5位,目的寄存器
+	\item shamt:5位,移位量
+	\item funct:6位,功能码,用来指定指令的具体操作
 \end{itemize}
 然而,这种安排存在着局限性,它使得寻址范围极为有限.
 例如,取字指令必须指定两个
@@ -96,10 +99,10 @@ op \t rs \t rt \t rd \t shamt \t funct \\
 所以,MIPS还引入另一种指令格式,同样是32位长,但是它的布局是
 op \t rs \t rt \t constant or address \\
 \begin{itemize}
-    \item op:6位,操作码,用来指定指令的类型
-    \item rs:5位,源寄存器,用来指定第一个操作数
-    \item rt:5位,目的寄存器,注意这里的rt含义发生了变化
-    \item constant or address:16位,常数或地址
+	\item op:6位,操作码,用来指定指令的类型
+	\item rs:5位,源寄存器,用来指定第一个操作数
+	\item rt:5位,目的寄存器,注意这里的rt含义发生了变化
+	\item constant or address:16位,常数或地址
 \end{itemize}
 举个例子,取字指令的格式是
 \begin{lstlisting}
@@ -112,8 +115,8 @@ op \t rs \t rt \t constant or address \\
 \subsection{决策指令}
 MIPS中有两条条件分支指令分别是
 \begin{itemize}
-    \item beq: if rs=rt then branch
-    \item bne: if rs!=rt then branch
+	\item beq: if rs=rt then branch
+	\item bne: if rs!=rt then branch
 \end{itemize}
 它们的格式是
 \begin{lstlisting}
