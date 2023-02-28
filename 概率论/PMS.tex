@@ -1,0 +1,93 @@
+\documentclass{ctexart}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\begin{document}
+\title{概率论与数理统计}
+\author{daydalek}
+\date{\today}
+\maketitle
+\section{基本概念}
+\subsection{随机事件}
+\subsubsection{随机试验}
+随机试验的要素:
+\begin{itemize}
+	\item 可以在相同的条件下重复进行
+	\item 每次实验的结果可能不止一个,并且可以事先明确所有可能结果
+	\item 进行一次试验之前不能确定哪个结果会出现
+\end{itemize}
+\subsubsection{样本空间}
+随机试验E的所有可能结果集合称为\textbf{样本空间}\\
+E的每个结果称为\textbf{样本点}\\
+\subsubsection{随机事件}
+E的样本空间S中的部分样本点组成的集合为E的\textbf{随机事件},简称为事件.\\
+S中所有样本点的集合称为\textbf{必然事件}\\
+不含任何样本点的集合称为\textbf{不可能事件}\\
+\subsubsection{事件之间的关系运算}
+\begin{itemize}
+	\item 事件的包含与相等
+	      \begin{equation}
+		      (A\subseteq B) \land (B\subseteq A) \Rightarrow A=B
+	      \end{equation}
+	\item 事件的并运算
+	      \begin{equation}
+		      A\cup B=\{x|x\in A\lor x\in B\}
+	      \end{equation}
+	\item 事件的交运算
+	      \begin{equation}
+		      A\cap B=\{x|x\in A\land x\in B\}
+	      \end{equation}
+	\item 事件的差运算
+	      \begin{equation}
+		      A-B=\{x|x\in A\land x\notin B\}
+	      \end{equation}
+	\item 事件的对立事件
+	      \begin{equation}
+		      A^c=\{x|x\notin A\}
+	      \end{equation}
+	\item 事件的互不相容
+	      \begin{equation}
+		      A\cap B=\emptyset
+	      \end{equation}
+\end{itemize}
+\section{频率和概率}
+\subsection{频率}
+\subsubsection{频率的定义}
+设E是一个随机试验,其样本空间为S,事件A是E的一个随机事件,则事件A发生的频率为
+\begin{equation}
+	f_n(A)=\frac{n_A}{n}
+\end{equation}
+其中$n_A$是事件A发生的次数(频数),$n$是试验E进行的次数.\\
+\subsubsection{概率}
+对于E的每一个事件A,都有一个实数p(A)称为事件A的\textbf{概率},集合P满足
+\begin{itemize}
+	\item 非负性
+	\item 规范性
+	\item 可加性
+\end{itemize}
+概率有以下性质
+\begin{itemize}
+	\item $P(\emptyset)=0$
+	\item 有限可加性
+	\item $P(A)\leq 1$
+	\item $A \subset B\Rightarrow P(B-A)=P(B)-P(A)$
+\end{itemize}
+广义加法公式(容斥原理)
+\begin{equation}
+    P(A\cup B)=P(A)+P(B)-P(A\cap B)
+\end{equation}
+它的推广:
+\begin{equation}
+    P(\bigcup_{i=1}^nA_i)=\sum_{i=1}^nP(A_i)-\sum_{i=1}^nP(A_i\cap A_j)+\sum_{i=1}^nP(A_i\cap A_j\cap A_k)-\cdots
+\end{equation}
+\subsection{等可能概型}
+\subsubsection{古典概型}
+\begin{itemize}
+    \item 试验E的样本空间S是一个有限集合
+    \item 试验E的每个样本点都是等可能的
+\end{itemize}
+\begin{equation}
+    P(A)=\frac{k}{n}=\sum_{j=1}^kP({e_{ij}})
+\end{equation}
+k代表A中所含的基本事件数,而n代表样本空间S中的样本点数.\\
+\
+\end{document}
