@@ -96,7 +96,7 @@
     \item 分组交换:传送突发数据
 \end{itemize}
 
-\section{计算机网络的分类}
+\subsection{计算机网络的分类}
 按照作用范围:
 \begin{itemize}
     \item WAN:广域网
@@ -111,15 +111,62 @@
     \item 专用网
 \end{itemize}
 
-\section{计算机网络的性能}
+\subsection{计算机网络的性能}
 7个常用的性能指标
 \begin{itemize}
-    \item 速率
-    \item 带宽
-    \item 吞吐量
-    \item 时延
-    \item 时延带宽积
-    \item 往返时间RTT
-    \item 利用率
+    \item 速率:单位时间内通过某个网络的数据量,bit/s
+    \item 带宽:有两种不同的含义.一则某个信道允许通过的频带宽度(hz),二则单位时间内某信道所能通过的"最高数据率"(bit/s).前者是\textbf{频域}称谓,后者是\textbf{时域}称谓,它们实质等价.
+    \item 吞吐量:单位时间内通过某个网络(信道,接口)\textbf{实际}的数据量,可用bit/s表示,也可以用每秒通过的字节数或帧数表示.
+    \item 时延:数据从一端传输到另一端的时间.分为发送,传播,排队,处理时延四种.其中$\mbox{发送时延}=\frac{\mbox{数据帧长度}}{\mbox{发送速率}}$,$\mbox{传播时延}=\frac{\mbox{信道长度}}{\mbox{电磁波在信道中的传播速率}}$
+    \item 时延带宽积:$\mbox{传播时延}\times\mbox{信道带宽}$,也称\textbf{以比特为单位的链路长度}
+    \item 往返时间RTT:从发送数据,到收到发送结果的时间总和
+    \item 利用率:分为信道利用率和网络利用率.网络利用率是信道利用率的加权平均.\\
+    利用率并非越高越好,过高的利用率会导致时延增加.在适当条件下,有这样的公式
+    $D=\frac{D_0}{1-U}$,其中$D_0$是空闲状态下的网络时延,$U$是网络利用率,$D$是当前网络时延.
 \end{itemize}
+\subsection{计算机网络体系架构}
+\subsubsection{参考模型}
+\begin{itemize}
+    \item OSI参考模型
+    \item TCP/IP参考模型
+\end{itemize}
+OSI参考模型是由国际标准化组织(ISO)制定的,然而得到最广泛使用的是TCP/IP参考模型,OSI参考模型仅停留在了理论阶段.\\
+这样,TCP/IP就成为了事实上的国际标准.
+\subsubsection{协议与划分层次}
+定义:协议是为进行网络中的数据交换而建立的规则,标准或约定.\\
+协议由三个要素组成:
+\begin{itemize}
+    \item 语法:协议的语法规定了协议的结构或格式.
+    \item 语义:需要发出何种控制信息,完成何种动作,做出何种响应.
+    \item 同步:事件实现顺序的详细说明.
+\end{itemize}
+ARAPNET的经验告诉我们,对于复杂的网络协议,其结构应该是分层的,这么做有如下好处:
+\begin{itemize}
+    \item 各层是独立的,降低了设计的复杂程度
+    \item 灵活性好
+    \item 结构上可分割开
+    \item 易于实现和维护
+    \item 能促进标准化工作
+\end{itemize}
+通常各层要完成的功能包含以下一种或多种:
+\begin{itemize}
+    \item 差错控制
+    \item 流量控制
+    \item 分段和重装
+    \item 复用和分用
+    \item 连接建立和释放
+\end{itemize}
+\textbf{计算机网络各层及其协议的集合}就是网络\textbf{体系结构}\\
+换言之,\textbf{计算机网络的体系结构就是这个计算机网络及其构件所应完成的功能的精确定义}
+\subsubsection{五层协议体系结构}
+OSI有七层,TCP/IP有四层,为了便于学习,折中使用一种五层结构.
+从上到下分别是
+\begin{itemize}
+    \item 应用层  
+    \item 运输层  
+    \item 网络层  
+    \item 数据链路层
+    \item 物理层  
+\end{itemize}
+
 \end{document}
