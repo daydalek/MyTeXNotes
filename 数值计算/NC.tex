@@ -1,0 +1,25 @@
+\documentclass{ctexart}
+\usepackage{amsmath}
+
+\begin{document}
+\title{数值计算}
+\author{daydalek}
+\date{\today}
+\maketitle
+\section{绪论}
+\subsection{误差的来源}
+\begin{itemize}
+    \item 模拟误差(model error)
+    \item 观测误差(observational error)
+    \item 截断误差(truncation error)
+    \item 舍入误差(round-off error)
+\end{itemize}
+
+\subsection{绝对误差与相对误差}
+\begin{itemize}
+    \item 绝对误差: \begin{equation}|e=x-x_*|,|e|<=\epsilon \end{equation},其中$\epsilon$为绝对误差限
+    \item 相对误差: \begin{equation}e_r=\frac{e}{x}\leq \epsilon_r \end{equation},其中$\epsilon_r$为相对误差限
+\end{itemize}
+\subsection{有效数字}
+从第一个非零数字$d_a$开始,到最后一个非零数字$d_b$,中间的数字个数为有效数字个数,即  \begin{equation}N=|d_b-d_a|+1\end{equation}
+\end{document}
