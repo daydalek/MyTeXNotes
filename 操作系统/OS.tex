@@ -96,57 +96,94 @@
 \subsubsection{操作系统的运行机制}
 大多数操作系统的内核包含以下内容
 \begin{itemize}
-\item 时钟管理
-\item 中断机制
-\item 原语(Atomic Operation):
-\begin{itemize} 
-    \item 处于操作系统最底层,最接近硬件 
-    \item 具有原子性,操作只能一气呵成
-	\item 运行时间较短,调用频繁 
-\end{itemize}
-\item 系统控制的数据结构及处理:常见的操作有
-\begin{itemize}
-    \item 进程管理
-    \item 存储器管理
-    \item 设备管理
-\end{itemize}
+	\item 时钟管理
+	\item 中断机制
+	\item 原语(Atomic Operation):
+	      \begin{itemize}
+		      \item 处于操作系统最底层,最接近硬件
+		      \item 具有原子性,操作只能一气呵成
+		      \item 运行时间较短,调用频繁
+	      \end{itemize}
+	\item 系统控制的数据结构及处理:常见的操作有
+	      \begin{itemize}
+		      \item 进程管理
+		      \item 存储器管理
+		      \item 设备管理
+	      \end{itemize}
 \end{itemize}
 
 \subsection{中断和异常的概念}
 \begin{itemize}
-    \item 中断(外中断):来自于cpu执行指令以外的事件发生,如外部设备的请求,时间片已到等.
-    \item 异常(内中断,陷入):cpu执行指令内部的事件发生,例如非法操作码,地址越界等
+	\item 中断(外中断):来自于cpu执行指令以外的事件发生,如外部设备的请求,时间片已到等.
+	\item 异常(内中断,陷入):cpu执行指令内部的事件发生,例如非法操作码,地址越界等
 \end{itemize}
 \subsubsection{中断处理的过程}
 \begin{itemize}
-    \item 关中断
-    \item 保存断点:为返回原来的地址,必须保存断点(即PC)
-    \item 中断服务程序寻址:实质是取出中断服务程序的入口地址送入PC
-    \item 保存现场和屏蔽字
-    \item 开中断:允许更高级中断程序得到响应(因为已经保存完现场了)
-    \item 执行中断服务程序:中断请求目的
-    \item 关中断:保证在恢复现场和屏蔽字时不被更高级的中断程序打扰
-    \item 恢复现场和屏蔽字
-    \item 开中断,中断返回:返回到源程序的断点处,继续执行.
+	\item 关中断
+	\item 保存断点:为返回原来的地址,必须保存断点(即PC)
+	\item 中断服务程序寻址:实质是取出中断服务程序的入口地址送入PC
+	\item 保存现场和屏蔽字
+	\item 开中断:允许更高级中断程序得到响应(因为已经保存完现场了)
+	\item 执行中断服务程序:中断请求目的
+	\item 关中断:保证在恢复现场和屏蔽字时不被更高级的中断程序打扰
+	\item 恢复现场和屏蔽字
+	\item 开中断,中断返回:返回到源程序的断点处,继续执行.
 \end{itemize}
 \subsection{系统调用}
 指用户调用一些系统提供的子功能,按功能可以分为
 \begin{itemize}
-    \item 设备管理
-    \item 文件管理
-    \item 进程控制
-    \item 进程通信
-    \item 内存管理
+	\item 设备管理
+	\item 文件管理
+	\item 进程控制
+	\item 进程通信
+	\item 内存管理
 \end{itemize}
 这些处理需要内核负责完成.用户可以执行\textbf{陷入指令}(访管指令,trap指令)发起系统调用,请求系统提供服务,此时CPU从\textbf{用户态}
 进入\textbf{核心态}.
 下面是一些用户态转向核心态的例子
 \begin{itemize}
-    \item 用户要求系统调用
-    \item 发生了一次中断
-    \item 用户程序中产生了一个错误状态(异常)
-    \item 用户程序企图执行一条特权指令
-    \item 从核心态转向用户态(实现这个的指令本身也是特权命令,一般是中断返回命令)
+	\item 用户要求系统调用
+	\item 发生了一次中断
+	\item 用户程序中产生了一个错误状态(异常)
+	\item 用户程序企图执行一条特权指令
+	\item 从核心态转向用户态(实现这个的指令本身也是特权命令,一般是中断返回命令)
 \end{itemize}
 访管指令是在用户态用的,因此它不是特权指令.
+\section{操作系统的体系架构}
+\subsection{大内核和微内核}
+\begin{itemize}
+	\item 大内核:操作系统的主要功能作为紧密整体运行在核心态
+	\item 微内核:把内核中最基本的功能保留在核心态,其他转移到用户态,被移出内核的操作系统代码按照层次被划分为若干服务程序,执行相互独立,通信借由微内核进行\\
+	      微内核的问题在于因为需要频繁切换用户态和核心态,执行开销偏大.有人提出把系统服务作为运行库链接到用户程序,称为\textbf{库操作系统}.
+\end{itemize}
+
+\section{进程管理}
+\subsection{进程与线程}
+\subsubsection{进程的概念}
+进程的概念是为更好地描述和控制程序的\textbf{并发}执行,实现操作系统的并发性和共享型而定义的.\\
+为了使得并发执行的程序能独立运行,配置了一种称为\textbf{进程控制块(Process Control Block)}的数据结构.\\
+\textbf{PCB是进程存在的唯一标志!}
+
+\subsubsection{进程的特征}
+进程的基本特征是对比单个程序的顺序执行提出的,也是对进程管理提出的基本要求.
+\begin{itemize}
+	\item 动态性:进程是动态地产生,变化和消亡的,动态性是进程地\textbf{基本特征}
+	\item 并发性:进程的重要特征,也是操作系统的重要特征.
+	\item 独立性:进程实体是一个能独立运行,独立获得资源和独立接受调度的\textbf{基本单位}.
+	\item 异步性:进程具有执行的间断性,为此操作系统必须配备进程同步机制以避免执行结果的不可再现性.
+	\item 结构性:进程实体是由\textbf{程序段,数据段和PCB(进程控制块)}构成的.
+\end{itemize}
+\subsection{进程的状态与转换}
+\begin{itemize}
+	\item 运行态:进程正在处理机上运行.
+	\item 就绪态:进程获得了除处理机之外的一切资源,一旦获得处理机资源可以立即开始执行.
+	\item 阻塞态:又名等待态,正在等待某一事件而暂停运行.
+	\item 创建态:进程正在被创建,包括申请空白PCB,向PCB中写入管理和控制进程信息,系统为进程分配所需的运行时资源等.
+	\item 结束态:进程正从系统中消失.
+\end{itemize}
+三种状态之间转换如下
+\begin{itemize}
+	\item:就绪态$\rightarrow$运行态:就绪态的进程被分派处理机时间片.
+	\item 运行态$\rightarrow$就绪态:在ke
+\end{itemize}
 \end{document}
