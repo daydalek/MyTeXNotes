@@ -546,7 +546,9 @@ INPUT d:/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT d:/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT d:/texlive/2022/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong55.tfm
 INPUT d:/texlive/2022/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong9f.tfm
+INPUT d:/texlive/2022/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei90.tfm
 INPUT OS.aux
+INPUT c:/Windows/Fonts/simhei.ttf
 INPUT c:/Windows/Fonts/simsun.ttc
 INPUT c:/Windows/Fonts/simsun.ttc
 INPUT c:/Windows/Fonts/simhei.ttf
